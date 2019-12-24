@@ -6,7 +6,7 @@ const webpack = require('webpack');
 module.exports = {
   mode: 'development',
   entry: {
-    app: './src/index.js',
+    app: './src/index.js'
     // print: './src/print.js'
   },
   devtool: 'inline-source-map',
@@ -17,7 +17,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'The Bluesman - You Can Play The Blues (Web Audio API)'
+      title: 'The Bluesman - You Can Play The Blues (Web Audio API)',
+      template: 'index.html'
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
@@ -30,18 +31,37 @@ module.exports = {
     rules: [
       // 加载 CSS
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        // test: /\.css$/,
+        // use: ['style-loader', 'css-loader']
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader'
+        ]
       },
       // 加载 images 图像
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader']
+        use: {
+          loader: 'file-loader',
+          options: {
+            esModule: false
+          }
+        }
       },
       // 加载 mp3 图像
       {
         test: /\.(mp3)$/,
-        use: ['file-loader']
+        use: {
+          loader: 'file-loader',
+          options: {
+            esModule: false
+          }
+        }
       },
       // 加载 fonts 字体
       {
@@ -56,6 +76,15 @@ module.exports = {
       {
         test: /\.xml$/,
         use: ['xml-loader']
+      },
+      {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            attrs: ['img:src', 'audio:src']
+          }
+        }
       }
     ]
   }
