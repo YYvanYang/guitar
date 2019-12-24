@@ -18,9 +18,18 @@ module.exports = merge(common, {
   ],
   module: {
     rules: [
+      // 加载 CSS
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        // test: /\.css$/,
+        // use: ['style-loader', 'css-loader']
+        test: /\.s[ac]ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader'
+        ]
       }
     ]
   }

@@ -9,7 +9,6 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'The Bluesman - You Can Play The Blues (Web Audio API)',
       template: 'index.html'
     })
   ],
@@ -20,19 +19,8 @@ module.exports = {
   module: {
     rules: [
       // 加载 CSS
-      {
-        // test: /\.css$/,
-        // use: ['style-loader', 'css-loader']
-        test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          'style-loader',
-          // Translates CSS into CommonJS
-          'css-loader',
-          // Compiles Sass to CSS
-          'sass-loader'
-        ]
-      },
+      // configed in dev or prod
+
       // 加载 images 图像
       {
         test: /\.(png|svg|jpg|gif)$/,
