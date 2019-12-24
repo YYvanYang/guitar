@@ -48,6 +48,9 @@ module.exports = {
         test: /\.(png|svg|jpg|gif)$/,
         use: {
           loader: 'file-loader',
+          // 我也遇到了图片资源超过limit，就变成[object Module]的问题；
+          // 这是因为新版file-loader使用了ES Module模块化方式，
+          // 将esModule配置为false就可以解决这个问题。可以看一下file-loader的change Log。
           options: {
             esModule: false
           }
